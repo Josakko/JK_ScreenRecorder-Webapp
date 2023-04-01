@@ -1,5 +1,6 @@
 html,
 body {
+  /* overflow: auto; */
   font-family: Arial;
   font-size: 16px;
   color: #fff;
@@ -7,6 +8,7 @@ body {
 }
 
 body {
+  overflow: auto;
   background: #10131c;
   display: flex;
   align-items: center;
@@ -37,21 +39,43 @@ button:disabled {
 
 button:disabled:hover {
     background-color: #ccc;
-    cursor: default;
+    cursor: not-allowed;
 }
 
 h1 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 0;
-    font-size: 3.5rem;
-    margin-bottom: 200px;
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0;
+  font-size: 3.5rem;
+  margin-bottom: 0px;
+}
+
+#status {
+  display: flex;
+  padding: 0px 0px;
+  font-size: 1.2rem;
+  justify-content: center;
+  /*color: #e63939;
+  color: #3eb337;*/
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 100px 0px;
+}
 
 button:hover {
     background-color: #409e3a;
+}
+
+.control {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 #downloadLink {
@@ -74,6 +98,7 @@ button:hover {
   margin-right: 10px;
   text-align: center;
   width: 210px;
+  align-items: center;
 }
 
 #downloadLink:hover {
@@ -98,7 +123,46 @@ button:hover {
 
 #refreshButton:disabled {
   background-color: #ccc;
-  cursor: default;
+  cursor: not-allowed;
+}
+
+#videoPreview {
+  display: flex;
+  flex-direction: column;
+  margin-right: 200px;
+  
+  /* top: 1;
+  left: 0;
+  object-fit: fill;
+  z-index: 1; */
+  width: 650px;
+  height: 366px;
+  background-color: black;
+}
+
+.page {
+  display: flex;
+  padding: 10px 10px;
+  flex-direction: row;
+}
+
+#video {
+  display: none;
+  /*position: fixed;*/
+  align-items: center;
+  margin-top: 150PX;
+  background-color: black;
+  top: 0;
+  width: 1000px;
+  height: 563px;
+
+}
+
+.recorded {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .modal {
@@ -137,5 +201,5 @@ button:hover {
   }
   
 #aboutLink {
-  margin-top: 400px;
+  margin-top: 300px;
 }
