@@ -7,7 +7,7 @@ Screen recorder built as web app
 Usage example down below.
 
 <p align="center">
-  <img alt="issue" src="" width="850px">
+  <img alt="issue" src="https://github.com/Josakko/JK_ScreenRecorder-Webapp/blob/main/image.png?raw=true" width="850px">
 </p>
 
 ## Need Help?
