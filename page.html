@@ -1,173 +1,264 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta charset="UTF-8">
     <style>
         html,
-        body {
-        font-family: Arial;
-        font-size: 16px;
-        color: #fff;
-        height: 100%;
-        }
+body {
+  /* overflow: auto; */
+  font-family: Arial;
+  font-size: 16px;
+  color: #fff;
+  height: 100%;
+}
 
-        body {
-        background: #10131c;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        -webkit-font-smoothing: antialiased;
-        -webkit-tap-highlight-color: transparent;
-        }
+body {
+  overflow: auto;
+  background: #10131c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
 
-        button {
-        font-family: Arial;
-        font-size: 16px;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        background-color: #4CAF50;
-        color: #fff;
-        cursor: pointer;
-        margin-right: 10px;
-        margin-top: 20px;
-        width: 250px;
-        }
+button {
+  font-family: Arial;
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #4CAF50;
+  color: #fff;
+  cursor: pointer;
+  margin-right: 10px;
+  margin-top: 20px;
+  width: 250px;
+}
 
-        button:disabled {
-        background-color: #ccc;
-        cursor: default;
-        }
+button:disabled {
+  background-color: #ccc;
+  cursor: default;
+}
 
-        button:disabled:hover {
-            background-color: #ccc;
-            cursor: default;
-        }
+button:disabled:hover {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
 
-        h1 {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 0;
-            font-size: 3.5rem;
-            margin-bottom: 200px;
-        }
-        
+h1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0;
+  font-size: 3.5rem;
+  margin-bottom: 0px;
+}
 
-        button:hover {
-            background-color: #409e3a;
-        }
+#status {
+  display: flex;
+  padding: 0px 0px;
+  font-size: 1.2rem;
+  justify-content: center;
+  /*color: #e63939;
+  color: #3eb337;*/
+}
 
-        #downloadLink {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        margin-top: 20px;
-        }
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 100px 0px;
+}
 
-        #downloadLink {
-        font-family: Arial;
-        font-size: 16px;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        background-color: #008CBA;
-        color: #fff;
-        text-decoration: none;
-        margin-right: 10px;
-        text-align: center;
-        width: 210px;
-        }
+button:hover {
+    background-color: #409e3a;
+}
 
-        #downloadLink:hover {
-        background-color: #006F8B;
-        }
+.control {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
-        #refreshButton {
-        font-family: Arial;
-        font-size: 16px;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        background-color: #4CAF50;
-        color: #fff;
-        cursor: pointer;
-        margin-top: 20px;
-        }
+#downloadLink {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
 
-        #refreshButton:hover {
-            background-color: #409e3a;
-        }
+#downloadLink {
+  font-family: Arial;
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #008CBA;
+  color: #fff;
+  text-decoration: none;
+  margin-right: 10px;
+  text-align: center;
+  width: 210px;
+  align-items: center;
+}
 
-        #refreshButton:disabled {
-        background-color: #ccc;
-        cursor: default;
-        }
+#downloadLink:hover {
+  background-color: #006F8B;
+}
 
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-        }
-        
-        .modal-content {
-            background-color: #dbdbdb;
-            color: black;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 60%;
-            max-width: 800px;
-        }
-        
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-        
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        
-        #aboutLink {
-        margin-top: 400px;
-        }
+#refreshButton {
+  font-family: Arial;
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #4CAF50;
+  color: #fff;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+#refreshButton:hover {
+    background-color: #409e3a;
+}
+
+#refreshButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+#videoPreview {
+  display: flex;
+  flex-direction: column;
+  margin-right: 200px;
+  
+  /* top: 1;
+  left: 0;
+  object-fit: fill;
+  z-index: 1; */
+  width: 650px;
+  height: 366px;
+  background-color: black;
+}
+
+.page {
+  display: flex;
+  padding: 10px 10px;
+  flex-direction: row;
+}
+
+#video {
+  display: none;
+  /*position: fixed;*/
+  align-items: center;
+  margin-top: 150PX;
+  background-color: black;
+  top: 0;
+  width: 1000px;
+  height: 563px;
+
+}
+
+.recorded {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+  }
+  
+  .modal-content {
+    background-color: #dbdbdb;
+    color: black;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%;
+    max-width: 800px;
+  }
+  
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+#aboutLink {
+  margin-top: 300px;
+}
     </style>
     <link rel="shortcut icon" type="image/x-icon" href="assets/favicon.ico">
-    <meta charset="utf-8">
     <title>JK ScreenRecorder</title>
   </head>
   <body>
-    <h1>JK Screen-Recorder</h1>
-    <button id="startButton">Start Recording</button>
-    <button id="stopButton" disabled>Stop Recording</button>
-    <a id="downloadLink" style="display: none;">Download File</a>
-    <button id="refreshButton">Refresh</button>
+    <div class="title">
+      <h1>JK Screen-Recorder</h1>
+      <p id="status"></p>
+    </div>
+    
+
+    <div class="page">
+      <video src="" id="videoPreview" muted></video>
+      <div class="control">
+        <button id="startButton">Start Recording</button>
+        <button id="stopButton" disabled>Stop Recording</button>
+        <button id="pauseButton" disabled>Pause Recording</button>
+        <button id="refreshButton">Refresh</button>
+      </div>
+    </div>
+
+    <div class="recorded">
+      <video src="" id="video"></video>
+      <a id="downloadLink" style="display: none;">Download Video</a>
+    </div>
+    
     <script>
         const startButton = document.getElementById('startButton');
         const stopButton = document.getElementById('stopButton');
         const downloadLink = document.getElementById('downloadLink');
         const refreshButton = document.getElementById('refreshButton');
+        const pauseButton = document.getElementById('pauseButton');
+        const status = document.getElementById('status');
+        const videoContainer = videoPreview.parentNode;
+
 
         let mediaRecorder;
         let recordedChunks = [];
 
         startButton.addEventListener('click', async () => {
         mediaRecorder = new MediaRecorder(await navigator.mediaDevices.getDisplayMedia({ video: true, audio: true }));
-         
+
         document.title = "Recording - JK ScreenRecorder";
+        status.style.color = "#3eb337";
+        status.textContent = "Recording";
         refreshButton.disabled = true;
+
+        const videoPreview = document.getElementById('videoPreview');
+
+        videoPreview.srcObject = mediaRecorder.stream;
+        videoPreview.play();
 
         mediaRecorder.addEventListener('dataavailable', e => {
             recordedChunks.push(e.data);
@@ -175,6 +266,14 @@
 
         mediaRecorder.addEventListener('stop', () => {
             const recordedBlob = new Blob(recordedChunks, { type: 'video/mp4' });
+
+            videoPreview.style.display = 'none';
+            //document.body.removeChild(videoPreview);
+
+            if (videoContainer.contains(videoPreview)) {
+            videoContainer.removeChild(videoPreview);
+            }
+
             downloadRecordedVideo(recordedBlob);
 
             recordedChunks = [];
@@ -183,27 +282,58 @@
             setTimeout(() => {
             refreshButton.disabled = false;
             }, 5000);
-            //setTimeout(() => {
-            //  location.reload();
-            //}, 5000);
         });
         mediaRecorder.start();
+        pauseButton.disabled = false;
         startButton.disabled = true;
         stopButton.disabled = false;
+
+        let RecordingPaused = false;
+        
+        mediaRecorder.addEventListener('pause', () => {
+            RecordingPaused = true;
+            pauseButton.textContent = 'Resume Recording';
         });
+        
+        mediaRecorder.addEventListener('resume', () => {
+            RecordingPaused = false;
+            pauseButton.textContent = 'Pause Recording';
+        });
+        
+        pauseButton.addEventListener('click', () => {
+            if (mediaRecorder.state === 'recording') {
+            mediaRecorder.pause();
+            document.title = "Paused - JK ScreenRecorder";
+            status.style.color = "#e63939";
+            status.textContent = "Paused";
+            } else if (RecordingPaused) {
+            mediaRecorder.resume();
+            document.title = "Recording - JK ScreenRecorder";
+            status.style.color = "#3eb337";
+            status.textContent = "Recording";
+            }
+        });
+        });
+
 
         stopButton.addEventListener('click', () => {
         document.title = "JK ScreenRecorder";
+        status.textContent = "";
         if (mediaRecorder && mediaRecorder.state !== 'inactive') {
             mediaRecorder.stop();
             mediaRecorder.stream.getTracks().forEach(track => track.stop());
 
             startButton.disabled = false;
             stopButton.disabled = true;
+            pauseButton.disabled = true;
 
             setTimeout(() => {
                 refreshButton.disabled = false;
             }, 5000);
+
+            //setTimeout(() => {
+            //  location.reload();
+            //}, 5000);
         }
         });
 
@@ -227,6 +357,15 @@
         downloadLink.href = url;
         downloadLink.download = fileName;
         downloadLink.style.display = "block";
+
+        const video = document.getElementById('video');
+
+        video.src = url;
+        video.controls = true;
+        //video.classList.add('video-player');
+        video.style.display = "flex";
+        video.scrollIntoView({ behavior: "smooth", block: "start" });
+        video.play();
         }
     </script>
     <a href="#" id="aboutLink">About</a>
@@ -235,7 +374,9 @@
         <span class="close">&times;</span>
         <h2>About JK Screen-Recorder</h2>
         <p>This is a screen recording tool created by Josakko that allows you to record your screen and save the recording as a video file.</p>
-        <p>To use this tool, simply click the "Start Recording" button to start recording your screen, and then click the "Stop Recording" button when you are finished then download recorded video using "Download File" button.</p>
+        <p>To use this tool, simply click the "Start Recording" button to start recording your screen and then click the "Stop Recording" button 
+          when you are finished, finally download recorded video using "Download File" button. If you are recording multiple videos please click 
+          on "Refresh" button after you download your video.</p>
       </div>
     </div>
     <script>
@@ -259,5 +400,3 @@
     </script>
   </body>
 </html>
-
-
