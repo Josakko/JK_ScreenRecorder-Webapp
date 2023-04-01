@@ -7,10 +7,10 @@ let mediaRecorder;
 let recordedChunks = [];
 
 startButton.addEventListener('click', async () => {
-  document.title = "Recording - JK ScreenRecorder";
-
-  refreshButton.disabled = true;
   mediaRecorder = new MediaRecorder(await navigator.mediaDevices.getDisplayMedia({ video: true, audio: true }));
+  
+  document.title = "Recording - JK ScreenRecorder";
+  refreshButton.disabled = true;
 
   mediaRecorder.addEventListener('dataavailable', e => {
     recordedChunks.push(e.data);
