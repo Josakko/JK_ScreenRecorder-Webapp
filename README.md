@@ -4,6 +4,7 @@ Screen recorder built as web app
 
 ## Usage
 
+Visit the website [here](https://jk-screenrecorder.netlify.app/).
 Usage example down below.
 
 <p align="center">
