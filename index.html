@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/favicon.ico">
+    <meta charset="utf-8">
+    <title>JK ScreenRecorder</title>
+  </head>
+  <body>
+    <h1>JK Screen-Recorder</h1>
+    <button id="startButton">Start Recording</button>
+    <button id="stopButton" disabled>Stop Recording</button>
+    <a id="downloadLink" style="display: none;">Download File</a>
+    <button id="refreshButton">Refresh</button>
+    <script src="script.js"></script>
+    <a href="#" id="aboutLink">About</a>
+    <div id="aboutModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>About JK Screen-Recorder</h2>
+        <p>This is a screen recording tool created by Josakko that allows you to record your screen and save the recording as a video file.</p>
+        <p>To use this tool, simply click the "Start Recording" button to start recording your screen, and then click the "Stop Recording" button when you are finished then download recorded video using "Download File" button.</p>
+      </div>
+    </div>
+    <script src="modal.js"></script>
+  </body>
+</html>
+
