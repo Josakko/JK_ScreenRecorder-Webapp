@@ -1,17 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link charset="UTF-8">
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" type="image/x-icon" href="assets/favicon.ico">
-    <meta charset="utf-8">
     <title>JK ScreenRecorder</title>
   </head>
   <body>
-    <h1>JK Screen-Recorder</h1>
-    <button id="startButton">Start Recording</button>
-    <button id="stopButton" disabled>Stop Recording</button>
-    <a id="downloadLink" style="display: none;">Download File</a>
-    <button id="refreshButton">Refresh</button>
+    <div class="title">
+      <h1>JK Screen-Recorder</h1>
+      <p id="status"></p>
+    </div>
+    <div class="page">
+      <video src="" id="videoPreview" muted></video>
+      <div class="control">
+        <button id="startButton">Start Recording</button>
+        <button id="stopButton" disabled>Stop Recording</button>
+        <button id="pauseButton" disabled>Pause Recording</button>
+        <button id="refreshButton">Refresh</button>
+      </div>
+    </div>
+    <div class="recorded">
+      <video src="" id="video"></video>
+      <a id="downloadLink" style="display: none;">Download Video</a>
+    </div>
     <script src="script.js"></script>
     <a href="#" id="aboutLink">About</a>
     <div id="aboutModal" class="modal">
@@ -19,10 +31,11 @@
         <span class="close">&times;</span>
         <h2>About JK Screen-Recorder</h2>
         <p>This is a screen recording tool created by Josakko that allows you to record your screen and save the recording as a video file.</p>
-        <p>To use this tool, simply click the "Start Recording" button to start recording your screen, and then click the "Stop Recording" button when you are finished then download recorded video using "Download File" button.</p>
+        <p>To use this tool, simply click the "Start Recording" button to start recording your screen and then click the "Stop Recording" button 
+          when you are finished, finally download recorded video using "Download File" button. If you are recording multiple videos please click 
+          on "Refresh" button after you download your video.</p>
       </div>
     </div>
     <script src="modal.js"></script>
   </body>
 </html>
-
