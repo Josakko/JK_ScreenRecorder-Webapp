@@ -4,6 +4,7 @@ var span = document.getElementsByClassName("close")[0];
 
 link.onclick = function() {
   modal.style.display = "block";
+  modal.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 span.onclick = function() {
