@@ -367,7 +367,7 @@
         video.controls = true;
         //video.classList.add('video-player');
         video.style.display = "flex";
-        video.scrollIntoView({ behavior: "smooth", block: "start" });
+        video.scrollIntoView({ behavior: "smooth", block: "center" });
         video.play();
         }
     </script>
@@ -390,7 +390,7 @@
 
         link.onclick = function() {
         modal.style.display = "block";
-        modal.scrollIntoView({ behavior: "smooth", block: "start" });
+        //modal.scrollIntoView({ behavior: "smooth", block: "center" });
         }
 
         span.onclick = function() {
