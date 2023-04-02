@@ -127,6 +127,6 @@ function downloadRecordedVideo(recordedBlob) {
   video.controls = true;
   //video.classList.add('video-player');
   video.style.display = "flex";
-  video.scrollIntoView({ behavior: "smooth", block: "start" });
+  video.scrollIntoView({ behavior: "smooth", block: "center" });
   video.play();
 }
