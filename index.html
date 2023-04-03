@@ -10,6 +10,10 @@
     <div class="title">
       <h1>JK Screen-Recorder</h1>
       <p id="status"></p>
+      <!--<div class="info">
+        <p id="status"></p>
+        <p id="duration"></!--<p>
+        </div>-->
     </div>
     <div class="page">
       <video src="" id="videoPreview" muted></video>
@@ -20,6 +24,29 @@
         <button id="refreshButton">Refresh</button>
       </div>
     </div>
+    <button id="settingsButton"><img id="settingsIcon" src="assets/settings.png" alt="Settings"></button>
+    <div id="settings" class="settings-modal">
+      <div class="settings-content">
+        <span class="settings-close">&times;</span>
+        <h2>Settings</h2>
+        <p>Framerate: <select id="frameRate">
+          <option>120</option>
+          <option>60</option>
+          <option selected>30</option>
+          <option>24</option>
+        </select></p>
+        <p>Recording resolution:<select id="resolution">
+          <option selected>Fit-Screen</option>
+          <option>4k</option>
+          <option>1080p</option>
+          <option>720p</option>
+          <option>360p</option>
+        </select></p>
+        <!--<p><input type="checkbox" id="mic" /> Record microphone audio</p> -->
+        <p><input type="checkbox" id="sys" checked> Record system audio</p>
+      </div>
+    </div>
+    <script src="settings.js"></script>
     <div class="recorded">
       <video src="" id="video"></video>
       <a id="downloadLink" style="display: none;">Download Video</a>
