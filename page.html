@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
+    <link charset="UTF-8">
     <style>
       html,
       body {
-        /* overflow: auto; */
+        overflow: auto;
         font-family: Arial;
         font-size: 16px;
         color: #fff;
@@ -13,7 +13,7 @@
       }
 
       body {
-        overflow: auto;
+        /*overflow: auto;*/
         background: #10131c;
         display: flex;
         align-items: center;
@@ -58,11 +58,27 @@
 
       #status {
         display: flex;
-        padding: 0px 0px;
         font-size: 1.2rem;
+        justify-content: center;
+        padding-right: 50px;
+        /*color: #e63939;
+        color: #3eb337;*/
+      }
+
+      #duration {
+        display: flex;
+        font-size: 1.2rem;
+        padding-left: 50px;
         justify-content: center;
         /*color: #e63939;
         color: #3eb337;*/
+      }
+
+      .info {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        padding-top: 15px;
       }
 
       .title {
@@ -82,6 +98,87 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+      }
+
+      #settingsButton {
+        display: block;
+        position: static;
+        top: 50%;
+        left: 50%;
+        transform: translate(670%, -1264%);
+        background-color: #dbdbdb;
+        text-align: center;
+        width: 50px;
+        height: 50px;
+        margin: 0px 0px;
+        padding: 0px 0px;
+      }
+
+      #settingsButton:hover {
+        cursor: pointer;
+        background-color: #b1bfd8;
+      }
+
+      #settingsButton:disabled:hover {
+        background-color: #dbdbdb;
+        cursor: not-allowed;
+      }
+
+      #settingsIcon {
+        width: 35px;
+        height: 35px;
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      .settings-modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+      }
+
+      .settings-content {
+        font-size: 1rem;
+        font-weight: 500;
+        background-color: #dbdbdb;
+        color: black;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 60%;
+        max-width: 800px;
+      }
+
+      #resolution,
+      #frameRate {
+        display: flex;
+        flex-direction: column;
+        padding: 0px 20px;
+        width: 200px;
+      }
+
+      #sys {
+        width: 20px;
+        height: 14px;
+      }
+
+      .settings-close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+      }
+
+      .settings-close:hover,
+      .settings-close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
       }
 
       #downloadLink {
@@ -136,7 +233,6 @@
         display: flex;
         flex-direction: column;
         margin-right: 200px;
-        
         /* top: 1;
         left: 0;
         object-fit: fill;
@@ -210,7 +306,6 @@
         margin-top: 300px;
         margin-bottom: 30px;
       }
-
     </style>
     <link rel="shortcut icon" type="image/x-icon" href="assets/favicon.ico">
     <title>JK ScreenRecorder</title>
@@ -219,9 +314,11 @@
     <div class="title">
       <h1>JK Screen-Recorder</h1>
       <p id="status"></p>
+      <!--<div class="info">
+        <p id="status"></p>
+        <p id="duration"></!--<p>
+        </div>-->
     </div>
-    
-
     <div class="page">
       <video src="" id="videoPreview" muted></video>
       <div class="control">
@@ -231,61 +328,134 @@
         <button id="refreshButton">Refresh</button>
       </div>
     </div>
+    <button id="settingsButton"><img id="settingsIcon" src="assets/settings.png" alt="Settings"></button>
+    <div id="settings" class="settings-modal">
+      <div class="settings-content">
+        <span class="settings-close">&times;</span>
+        <h2>Settings</h2>
+        <p>Framerate: <select id="frameRate">
+          <option>120</option>
+          <option>60</option>
+          <option selected>30</option>
+          <option>24</option>
+        </select></p>
+        <p>Recording resolution:<select id="resolution">
+          <option selected>Fit-Screen</option>
+          <option>4k</option>
+          <option>1080p</option>
+          <option>720p</option>
+          <option>360p</option>
+        </select></p>
+        <!--<p><input type="checkbox" id="mic" /> Record microphone audio</p> -->
+        <p><input type="checkbox" id="sys" checked> Record system audio</p>
+      </div>
+    </div>
+    <script>
+      var settings = document.getElementById("settings");
+      var buttonSettings = document.getElementById("settingsButton");
+      var spanSettings = document.getElementsByClassName("settings-close")[0];
 
+      buttonSettings.onclick = function() {
+        settings.style.display = "block";
+        //settings.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+
+      spanSettings.onclick = function() {
+        settings.style.display = "none";
+      }
+
+      window.onclick = function(event) {
+        if (event.target == settings) {
+          settings.style.display = "none";
+        }
+      }
+    </script>
     <div class="recorded">
       <video src="" id="video"></video>
       <a id="downloadLink" style="display: none;">Download Video</a>
     </div>
-    
     <script>
-        const startButton = document.getElementById('startButton');
-        const stopButton = document.getElementById('stopButton');
-        const downloadLink = document.getElementById('downloadLink');
-        const refreshButton = document.getElementById('refreshButton');
-        const pauseButton = document.getElementById('pauseButton');
-        const status = document.getElementById('status');
-        const videoContainer = videoPreview.parentNode;
+      const startButton = document.getElementById('startButton');
+      const stopButton = document.getElementById('stopButton');
+      const downloadLink = document.getElementById('downloadLink');
+      const refreshButton = document.getElementById('refreshButton');
+      const pauseButton = document.getElementById('pauseButton');
+      const status = document.getElementById('status');
+      const videoContainer = videoPreview.parentNode;
+      const duration = document.getElementById('duration');
+      const video = document.getElementById('video');
+      const frameRate = document.querySelector('#frameRate');
+      const resolution = document.querySelector('#resolution');
+      const settingsButton = document.getElementById('settingsButton');
 
 
-        let mediaRecorder;
-        let recordedChunks = [];
+      const sysCheckbox = document.getElementById('sys');
+      let sys = true;
+      sysCheckbox.addEventListener('click', () => {
+        sys = sysCheckbox.checked;
+      });
 
-        startButton.addEventListener('click', async () => {
-        mediaRecorder = new MediaRecorder(await navigator.mediaDevices.getDisplayMedia({ video: true, audio: true }));
+      //  const micCheckbox = document.getElementById('mic');
+      //  let mic = false;
+      //  micCheckbox.addEventListener('click', () => {
+      //    mic = micCheckbox.checked;
+      //  });
+
+      let mediaRecorder;
+      let recordedChunks = [];
+
+      startButton.addEventListener('click', async () => {
+        try {
+          mediaRecorder = new MediaRecorder(await navigator.mediaDevices.getDisplayMedia(MediaConstraints()));
+        } catch (e) {
+          if (e.message.includes("audio source")) {
+            console.log("Please allow usage of microphone in order to record microphone audio");
+          } else {
+            console.log("Please select one of screens and then click 'Share' in order to record");
+          }
+          return;
+        }
+
+        //if (mic === true) {
+        //  voice = new MediaRecorder(await navigator.mediaDevices.getUserMedia({ video: false, audio: mic }));
+        //}
 
         document.title = "Recording - JK ScreenRecorder";
         status.style.color = "#3eb337";
         status.textContent = "Recording";
+        //duration.style.color = "#3eb337";
+        //startDuration();
         refreshButton.disabled = true;
+        settingsButton.disabled = true;
 
         const videoPreview = document.getElementById('videoPreview');
+
+        //videoPreview.width = Math.ceil(screen.width / 3);
+        //videoPreview.height = Math.ceil(screen.height / 3);
 
         videoPreview.srcObject = mediaRecorder.stream;
         videoPreview.play();
 
         mediaRecorder.addEventListener('dataavailable', e => {
-            recordedChunks.push(e.data);
+          recordedChunks.push(e.data);
         });
 
         mediaRecorder.addEventListener('stop', () => {
-            const recordedBlob = new Blob(recordedChunks, { type: 'video/mp4' });
+          const recordedBlob = new Blob(recordedChunks, { type: 'video/mp4; codecs = H264' }); //type: 'video/mp4'
 
-            videoPreview.style.display = 'none';
-            //document.body.removeChild(videoPreview);
+          videoPreview.style.display = 'none';
+          //document.body.removeChild(videoPreview);
 
-            if (videoContainer.contains(videoPreview)) {
+          if (videoContainer.contains(videoPreview)) {
             videoContainer.removeChild(videoPreview);
-            }
+          }
 
-            downloadRecordedVideo(recordedBlob);
+          downloadRecordedVideo(recordedBlob);
 
-            recordedChunks = [];
-            mediaRecorder = null;
-
-            setTimeout(() => {
-            refreshButton.disabled = false;
-            }, 5000);
+          recordedChunks = [];
+          mediaRecorder = null;
         });
+
         mediaRecorder.start();
         pauseButton.disabled = false;
         startButton.disabled = true;
@@ -294,57 +464,104 @@
         let RecordingPaused = false;
         
         mediaRecorder.addEventListener('pause', () => {
-            RecordingPaused = true;
-            pauseButton.textContent = 'Resume Recording';
+          RecordingPaused = true;
+          pauseButton.textContent = 'Resume Recording';
         });
         
         mediaRecorder.addEventListener('resume', () => {
-            RecordingPaused = false;
-            pauseButton.textContent = 'Pause Recording';
+          RecordingPaused = false;
+          pauseButton.textContent = 'Pause Recording';
         });
         
         pauseButton.addEventListener('click', () => {
-            if (mediaRecorder.state === 'recording') {
+          if (mediaRecorder.state === 'recording') {
             mediaRecorder.pause();
             document.title = "Paused - JK ScreenRecorder";
             status.style.color = "#e63939";
             status.textContent = "Paused";
-            } else if (RecordingPaused) {
+            //duration.style.color = "#e63939";
+          } else if (RecordingPaused) {
             mediaRecorder.resume();
             document.title = "Recording - JK ScreenRecorder";
             status.style.color = "#3eb337";
             status.textContent = "Recording";
-            }
+            //duration.style.color = "#3eb337";
+          }
         });
-        });
+      });
 
-
-        stopButton.addEventListener('click', () => {
+      stopButton.addEventListener('click', () => {
         document.title = "JK ScreenRecorder";
         status.textContent = "";
+        //stopDuration();
+        //duration.textContent = "";
         if (mediaRecorder && mediaRecorder.state !== 'inactive') {
-            mediaRecorder.stop();
-            mediaRecorder.stream.getTracks().forEach(track => track.stop());
+          mediaRecorder.stop();
+          mediaRecorder.stream.getTracks().forEach(track => track.stop());
 
-            startButton.disabled = false;
-            stopButton.disabled = true;
-            pauseButton.disabled = true;
+          startButton.disabled = false;
+          settingsButton.disabled = false;
+          stopButton.disabled = true;
+          pauseButton.disabled = true;
 
-            setTimeout(() => {
-                refreshButton.disabled = false;
-            }, 5000);
+          setTimeout(() => {
+              refreshButton.disabled = false;
+          }, 5000);
 
-            //setTimeout(() => {
-            //  location.reload();
-            //}, 5000);
+          //setTimeout(() => {
+          //  location.reload();
+          //}, 5000);
         }
-        });
+      });
 
-        refreshButton.addEventListener('click', () => {
-        location.reload();
-        });
+      function MediaConstraints() {
+        var Constraints = {}
+        Constraints.audio = sys; //sys;
+        Constraints.video = { mediaSource: "screen" };
+        Constraints.video.frameRate = frameRate;
+        
+        switch (resolution.value) {
+            case 'Fit-Screen':
+                Constraints.video.width = screen.width;
+                Constraints.video.height = screen.height;
+                break;
+            case '4K':
+                Constraints.video.width = 3840;
+                Constraints.video.height = 2160;
+                break;
+            case '1080p':
+                Constraints.video.width = 1920;
+                Constraints.video.height = 1080;
+                break;
+            case '720p':
+                Constraints.video.width = 1280;
+                Constraints.video.height = 720;
+                break;
+            case '480p':
+                Constraints.video.width = 854;
+                Constraints.video.height = 480;
+                break;
+            case '360p':
+                Constraints.video.width = 640;
+                Constraints.video.height = 360;
+                break;
+        }
+        return Constraints;
+      }
 
-        function downloadRecordedVideo(recordedBlob) {
+      let recorded = false;
+
+      refreshButton.addEventListener('click', () => {
+        if (recorded) {
+          if (confirm("Are you sure you want to lose the video by refreshing the page?")) {
+            location.reload();
+          }
+        } else {
+          location.reload();
+        }
+      });
+
+      function downloadRecordedVideo(recordedBlob) {
         const now = new Date();
         const year = now.getFullYear();
         const month = now.getMonth() + 1;
@@ -361,15 +578,14 @@
         downloadLink.download = fileName;
         downloadLink.style.display = "block";
 
-        const video = document.getElementById('video');
-
         video.src = url;
         video.controls = true;
         //video.classList.add('video-player');
         video.style.display = "flex";
         video.scrollIntoView({ behavior: "smooth", block: "center" });
+        recorded = true;
         video.play();
-        }
+      }
     </script>
     <a href="#" id="aboutLink">About</a>
     <div id="aboutModal" class="modal">
@@ -384,24 +600,24 @@
       </div>
     </div>
     <script>
-        var modal = document.getElementById("aboutModal");
-        var link = document.getElementById("aboutLink");
-        var span = document.getElementsByClassName("close")[0];
+      var modal = document.getElementById("aboutModal");
+      var link = document.getElementById("aboutLink");
+      var span = document.getElementsByClassName("close")[0];
 
-        link.onclick = function() {
+      link.onclick = function() {
         modal.style.display = "block";
         //modal.scrollIntoView({ behavior: "smooth", block: "center" });
-        }
+      }
 
-        span.onclick = function() {
+      span.onclick = function() {
         modal.style.display = "none";
-        }
+      }
 
-        window.onclick = function(event) {
+      window.onclick = function(event) {
         if (event.target == modal) {
-            modal.style.display = "none";
+          modal.style.display = "none";
         }
-        }
+      }
     </script>
   </body>
 </html>
