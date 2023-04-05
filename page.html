@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link charset="UTF-8">
+    <link charset="UTF-8" />
     <style>
       html,
       body {
@@ -65,7 +65,15 @@
         color: #3eb337;*/
       }
 
-      #duration {
+      #dash {
+        display: flex;
+        font-size: 1.2rem;
+        justify-content: center;
+        /*color: #e63939;
+        color: #3eb337;*/
+      }
+
+      #timer {
         display: flex;
         font-size: 1.2rem;
         padding-left: 50px;
@@ -105,7 +113,7 @@
         position: static;
         top: 50%;
         left: 50%;
-        transform: translate(670%, -1264%);
+        transform: translate(670%, -1294%);
         background-color: #dbdbdb;
         text-align: center;
         width: 50px;
@@ -161,6 +169,13 @@
         padding: 0px 20px;
         width: 200px;
       }
+
+      /*
+      #mic {
+        width: 20px;
+        height: 14px;
+      }
+      */
 
       #sys {
         width: 20px;
@@ -307,17 +322,18 @@
         margin-bottom: 30px;
       }
     </style>
-    <link rel="shortcut icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/favicon.ico" />
     <title>JK ScreenRecorder</title>
   </head>
   <body>
     <div class="title">
       <h1>JK Screen-Recorder</h1>
-      <p id="status"></p>
-      <!--<div class="info">
+      <!--<p id="status"></p>-->
+      	<div class="info">
         <p id="status"></p>
-        <p id="duration"></!--<p>
-        </div>-->
+        <p id="dash"></p>
+        <p id="timer"></p>
+        </div>
     </div>
     <div class="page">
       <video src="" id="videoPreview" muted></video>
@@ -328,26 +344,33 @@
         <button id="refreshButton">Refresh</button>
       </div>
     </div>
-    <button id="settingsButton"><img id="settingsIcon" src="assets/settings.png" alt="Settings"></button>
+    <button id="settingsButton">
+      <img id="settingsIcon" src="assets/settings.png" alt="Settings" />
+    </button>
     <div id="settings" class="settings-modal">
       <div class="settings-content">
         <span class="settings-close">&times;</span>
         <h2>Settings</h2>
-        <p>Framerate: <select id="frameRate">
-          <option>120</option>
-          <option>60</option>
-          <option selected>30</option>
-          <option>24</option>
-        </select></p>
-        <p>Recording resolution:<select id="resolution">
-          <option selected>Fit-Screen</option>
-          <option>4k</option>
-          <option>1080p</option>
-          <option>720p</option>
-          <option>360p</option>
-        </select></p>
-        <!--<p><input type="checkbox" id="mic" /> Record microphone audio</p> -->
-        <p><input type="checkbox" id="sys" checked> Record system audio</p>
+        <p>
+          Framerate:
+          <select id="frameRate">
+            <option>120</option>
+            <option>60</option>
+            <option selected>30</option>
+            <option>24</option>
+          </select>
+        </p>
+        <p>
+          Recording resolution:<select id="resolution">
+            <option selected>Fit-Screen</option>
+            <option>4k</option>
+            <option>1080p</option>
+            <option>720p</option>
+            <option>360p</option>
+          </select>
+        </p>
+        <!--<p><input type="checkbox" id="mic" /> Record microphone audio</p>-->
+        <p><input type="checkbox" id="sys" checked /> Record system audio</p>
       </div>
     </div>
     <script>
@@ -372,7 +395,7 @@
     </script>
     <div class="recorded">
       <video src="" id="video"></video>
-      <a id="downloadLink" style="display: none;">Download Video</a>
+      <a id="downloadLink" style="display: none">Download Video</a>
     </div>
     <script>
       const startButton = document.getElementById('startButton');
@@ -381,8 +404,9 @@
       const refreshButton = document.getElementById('refreshButton');
       const pauseButton = document.getElementById('pauseButton');
       const status = document.getElementById('status');
+      const dash = document.getElementById('dash');
+      const timer = document.getElementById('timer');
       const videoContainer = videoPreview.parentNode;
-      const duration = document.getElementById('duration');
       const video = document.getElementById('video');
       const frameRate = document.querySelector('#frameRate');
       const resolution = document.querySelector('#resolution');
@@ -395,11 +419,11 @@
         sys = sysCheckbox.checked;
       });
 
-      //  const micCheckbox = document.getElementById('mic');
-      //  let mic = false;
-      //  micCheckbox.addEventListener('click', () => {
-      //    mic = micCheckbox.checked;
-      //  });
+      //const micCheckbox = document.getElementById('mic');
+      //let mic = false;
+      //micCheckbox.addEventListener('click', () => {
+      //  mic = micCheckbox.checked;
+      //});
 
       let mediaRecorder;
       let recordedChunks = [];
@@ -419,12 +443,13 @@
         //if (mic === true) {
         //  voice = new MediaRecorder(await navigator.mediaDevices.getUserMedia({ video: false, audio: mic }));
         //}
-
-        document.title = "Recording - JK ScreenRecorder";
+        startTimer()
+        timer.style.color = "#3eb337";
         status.style.color = "#3eb337";
+        dash.style.color = "#3eb337";
         status.textContent = "Recording";
-        //duration.style.color = "#3eb337";
-        //startDuration();
+        dash.textContent = "-";
+        document.title = "Recording - JK ScreenRecorder";
         refreshButton.disabled = true;
         settingsButton.disabled = true;
 
@@ -476,28 +501,35 @@
         pauseButton.addEventListener('click', () => {
           if (mediaRecorder.state === 'recording') {
             mediaRecorder.pause();
-            document.title = "Paused - JK ScreenRecorder";
+            stopTimer();
+            timer.style.color = "#e63939";
+            dash.style.color = "#e63939";
             status.style.color = "#e63939";
             status.textContent = "Paused";
-            //duration.style.color = "#e63939";
+            dash.textContent = "-";
+            document.title = "Paused - JK ScreenRecorder";
           } else if (RecordingPaused) {
             mediaRecorder.resume();
-            document.title = "Recording - JK ScreenRecorder";
+            startTimer();
+            timer.style.color = "#3eb337";
+            dash.style.color = "#3eb447";
             status.style.color = "#3eb337";
             status.textContent = "Recording";
-            //duration.style.color = "#3eb337";
+            dash.textContent = "-";
+            document.title = "Recording - JK ScreenRecorder";
           }
         });
       });
 
       stopButton.addEventListener('click', () => {
-        document.title = "JK ScreenRecorder";
-        status.textContent = "";
-        //stopDuration();
-        //duration.textContent = "";
         if (mediaRecorder && mediaRecorder.state !== 'inactive') {
           mediaRecorder.stop();
+          stopTimer();
           mediaRecorder.stream.getTracks().forEach(track => track.stop());
+          status.style.color = "#e2cb45";
+          dash.style.color = "#e2cb45";
+          timer.style.color = "#e2cb45";
+          document.title = "JK ScreenRecorder";
 
           startButton.disabled = false;
           settingsButton.disabled = false;
@@ -506,11 +538,14 @@
 
           setTimeout(() => {
               refreshButton.disabled = false;
+              status.textContent = "";
+              timer.textContent = "";
+              dash.textContent = "";
           }, 5000);
 
           //setTimeout(() => {
           //  location.reload();
-          //}, 5000);
+          //}, 10000);
         }
       });
 
@@ -561,6 +596,57 @@
         }
       });
 
+      var hr = 0;
+      var min = 0;
+      var sec = 0;
+      var stoptime = true;
+
+      function startTimer() {
+        if (stoptime == true) {
+          stoptime = false;
+          timerCycle();
+        }
+      }
+      function stopTimer() {
+        if (stoptime == false) {
+          stoptime = true;
+        }
+      }
+
+      function timerCycle() {
+        if (stoptime == false) {
+          sec = parseInt(sec);
+          min = parseInt(min);
+          hr = parseInt(hr);
+
+          sec = sec + 1;
+
+          if (sec == 60) {
+            min = min + 1;
+            sec = 0;
+          }
+          if (min == 60) {
+            hr = hr + 1;
+            min = 0;
+            sec = 0;
+          }
+
+          if (sec < 10 || sec == 0) {
+            sec = '0' + sec;
+          }
+          if (min < 10 || min == 0) {
+            min = '0' + min;
+          }
+          if (hr < 10 || hr == 0) {
+            hr = '0' + hr;
+          }
+
+          timer.textContent = hr + ':' + min + ':' + sec;
+
+          setTimeout("timerCycle()", 1000);
+        }
+      }
+
       function downloadRecordedVideo(recordedBlob) {
         const now = new Date();
         const year = now.getFullYear();
@@ -592,11 +678,20 @@
       <div class="modal-content">
         <span class="close">&times;</span>
         <h2>About JK Screen-Recorder</h2>
-        <p>This is a screen recording tool created by Josakko that allows you to record your screen and save the recording as a video file. 
-          Visit my github <a href="https://github.com/Josakko">here</a>.</p>
-        <p>To use this tool, simply click the "Start Recording" button to start recording your screen and then click the "Stop Recording" button 
-          when you are finished, finally download recorded video using "Download File" button. If you are recording multiple videos please click 
-          on "Refresh" button after you download your video. If you need any help contact me on my <a href="https://discord.gg/xgET5epJE6">discord server</a>.</p>
+        <p>
+          This is a screen recording tool created by Josakko that allows you to
+          record your screen and save the recording as a video file. Visit my
+          github <a href="https://github.com/Josakko">here</a>.
+        </p>
+        <p>
+          To use this tool, simply click the "Start Recording" button to start
+          recording your screen and then click the "Stop Recording" button when
+          you are finished, finally download recorded video using "Download
+          File" button. If you are recording multiple videos please click on
+          "Refresh" button after you download your video. If you need any help
+          contact me on my
+          <a href="https://discord.gg/xgET5epJE6">discord server</a>.
+        </p>
       </div>
     </div>
     <script>
