@@ -60,7 +60,15 @@ h1 {
   color: #3eb337;*/
 }
 
-#duration {
+#dash {
+  display: flex;
+  font-size: 1.2rem;
+  justify-content: center;
+  /*color: #e63939;
+  color: #3eb337;*/
+}
+
+#timer {
   display: flex;
   font-size: 1.2rem;
   padding-left: 50px;
@@ -100,7 +108,7 @@ button:hover {
   position: static;
   top: 50%;
   left: 50%;
-  transform: translate(670%, -1264%);
+  transform: translate(670%, -1294%);
   background-color: #dbdbdb;
   text-align: center;
   width: 50px;
@@ -156,6 +164,13 @@ button:hover {
   padding: 0px 20px;
   width: 200px;
 }
+
+/*
+#mic {
+  width: 20px;
+  height: 14px;
+}
+*/
 
 #sys {
   width: 20px;
