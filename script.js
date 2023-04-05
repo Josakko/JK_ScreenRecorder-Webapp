@@ -4,8 +4,9 @@ const downloadLink = document.getElementById('downloadLink');
 const refreshButton = document.getElementById('refreshButton');
 const pauseButton = document.getElementById('pauseButton');
 const status = document.getElementById('status');
+const dash = document.getElementById('dash');
+const timer = document.getElementById('timer');
 const videoContainer = videoPreview.parentNode;
-const duration = document.getElementById('duration');
 const video = document.getElementById('video');
 const frameRate = document.querySelector('#frameRate');
 const resolution = document.querySelector('#resolution');
@@ -18,11 +19,11 @@ sysCheckbox.addEventListener('click', () => {
   sys = sysCheckbox.checked;
 });
 
-//  const micCheckbox = document.getElementById('mic');
-//  let mic = false;
-//  micCheckbox.addEventListener('click', () => {
-//    mic = micCheckbox.checked;
-//  });
+//const micCheckbox = document.getElementById('mic');
+//let mic = false;
+//micCheckbox.addEventListener('click', () => {
+//  mic = micCheckbox.checked;
+//});
 
 let mediaRecorder;
 let recordedChunks = [];
@@ -42,12 +43,13 @@ startButton.addEventListener('click', async () => {
   //if (mic === true) {
   //  voice = new MediaRecorder(await navigator.mediaDevices.getUserMedia({ video: false, audio: mic }));
   //}
-
-  document.title = "Recording - JK ScreenRecorder";
+  startTimer()
+  timer.style.color = "#3eb337";
   status.style.color = "#3eb337";
+  dash.style.color = "#3eb337";
   status.textContent = "Recording";
-  //duration.style.color = "#3eb337";
-  //startDuration();
+  dash.textContent = "-";
+  document.title = "Recording - JK ScreenRecorder";
   refreshButton.disabled = true;
   settingsButton.disabled = true;
 
@@ -99,28 +101,35 @@ startButton.addEventListener('click', async () => {
   pauseButton.addEventListener('click', () => {
     if (mediaRecorder.state === 'recording') {
       mediaRecorder.pause();
-      document.title = "Paused - JK ScreenRecorder";
+      stopTimer();
+      timer.style.color = "#e63939";
+      dash.style.color = "#e63939";
       status.style.color = "#e63939";
       status.textContent = "Paused";
-      //duration.style.color = "#e63939";
+      dash.textContent = "-";
+      document.title = "Paused - JK ScreenRecorder";
     } else if (RecordingPaused) {
       mediaRecorder.resume();
-      document.title = "Recording - JK ScreenRecorder";
+      startTimer();
+      timer.style.color = "#3eb337";
+      dash.style.color = "#3eb447";
       status.style.color = "#3eb337";
       status.textContent = "Recording";
-      //duration.style.color = "#3eb337";
+      dash.textContent = "-";
+      document.title = "Recording - JK ScreenRecorder";
     }
   });
 });
 
 stopButton.addEventListener('click', () => {
-  document.title = "JK ScreenRecorder";
-  status.textContent = "";
-  //stopDuration();
-  //duration.textContent = "";
   if (mediaRecorder && mediaRecorder.state !== 'inactive') {
     mediaRecorder.stop();
+    stopTimer();
     mediaRecorder.stream.getTracks().forEach(track => track.stop());
+    status.style.color = "#e2cb45";
+    dash.style.color = "#e2cb45";
+    timer.style.color = "#e2cb45";
+    document.title = "JK ScreenRecorder";
 
     startButton.disabled = false;
     settingsButton.disabled = false;
@@ -129,11 +138,14 @@ stopButton.addEventListener('click', () => {
 
     setTimeout(() => {
         refreshButton.disabled = false;
+        status.textContent = "";
+        timer.textContent = "";
+        dash.textContent = "";
     }, 5000);
 
     //setTimeout(() => {
     //  location.reload();
-    //}, 5000);
+    //}, 10000);
   }
 });
 
@@ -183,6 +195,57 @@ refreshButton.addEventListener('click', () => {
     location.reload();
   }
 });
+
+var hr = 0;
+var min = 0;
+var sec = 0;
+var stoptime = true;
+
+function startTimer() {
+  if (stoptime == true) {
+		stoptime = false;
+		timerCycle();
+	}
+}
+function stopTimer() {
+  if (stoptime == false) {
+    stoptime = true;
+  }
+}
+
+function timerCycle() {
+	if (stoptime == false) {
+    sec = parseInt(sec);
+    min = parseInt(min);
+    hr = parseInt(hr);
+
+    sec = sec + 1;
+
+    if (sec == 60) {
+      min = min + 1;
+      sec = 0;
+    }
+    if (min == 60) {
+      hr = hr + 1;
+      min = 0;
+      sec = 0;
+    }
+
+    if (sec < 10 || sec == 0) {
+      sec = '0' + sec;
+    }
+    if (min < 10 || min == 0) {
+      min = '0' + min;
+    }
+    if (hr < 10 || hr == 0) {
+      hr = '0' + hr;
+    }
+
+    timer.textContent = hr + ':' + min + ':' + sec;
+
+		setTimeout("timerCycle()", 1000);
+  }
+}
 
 function downloadRecordedVideo(recordedBlob) {
   const now = new Date();
