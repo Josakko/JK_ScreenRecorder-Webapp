@@ -97,28 +97,28 @@ startButton.addEventListener('click', async () => {
     RecordingPaused = false;
     pauseButton.textContent = 'Pause Recording';
   });
-  
-  pauseButton.addEventListener('click', () => {
-    if (mediaRecorder.state === 'recording') {
-      mediaRecorder.pause();
-      stopTimer();
-      timer.style.color = "#e63939";
-      dash.style.color = "#e63939";
-      status.style.color = "#e63939";
-      status.textContent = "Paused";
-      dash.textContent = "-";
-      document.title = "Paused - JK ScreenRecorder";
-    } else if (RecordingPaused) {
-      mediaRecorder.resume();
-      startTimer();
-      timer.style.color = "#3eb337";
-      dash.style.color = "#3eb447";
-      status.style.color = "#3eb337";
-      status.textContent = "Recording";
-      dash.textContent = "-";
-      document.title = "Recording - JK ScreenRecorder";
-    }
-  });
+});
+
+pauseButton.addEventListener('click', () => {
+  if (mediaRecorder.state === 'recording') {
+    mediaRecorder.pause();
+    stopTimer();
+    timer.style.color = "#e63939";
+    dash.style.color = "#e63939";
+    status.style.color = "#e63939";
+    status.textContent = "Paused";
+    dash.textContent = "-";
+    document.title = "Paused - JK ScreenRecorder";
+  } else if (RecordingPaused) {
+    mediaRecorder.resume();
+    startTimer();
+    timer.style.color = "#3eb337";
+    dash.style.color = "#3eb447";
+    status.style.color = "#3eb337";
+    status.textContent = "Recording";
+    dash.textContent = "-";
+    document.title = "Recording - JK ScreenRecorder";
+  }
 });
 
 stopButton.addEventListener('click', () => {
