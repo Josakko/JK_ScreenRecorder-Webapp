@@ -6,6 +6,8 @@ Screen recorder built as web app
 
 Visit the website [here](https://jk-screenrecorder.netlify.app/).
 
+Usage demo [here](https://youtu.be/zU0eJQqYgaI).
+
 Image down below is outdated, to see actual look of the website vist it!
 
 <p align="center">
