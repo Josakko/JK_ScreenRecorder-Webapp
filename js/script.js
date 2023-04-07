@@ -1,4 +1,4 @@
-"use strict";
+//"use strict";
 
 const startButton = document.getElementById('startButton');
 const stopButton = document.getElementById('stopButton');
@@ -33,7 +33,7 @@ startButton.addEventListener('click', async () => {
   TimeLimit()
 
   //if (mic === true) {
-  //  voice = new MediaRecorder(await navigator.mediaDevices.getUserMedia({ video: false, audio: mic }));
+  //  voiceRecorder = new MediaRecorder(await navigator.mediaDevices.getUserMedia({ video: false, audio: mic }));
   //}
 
   timer.textContent = "";
@@ -123,6 +123,7 @@ stopButton.addEventListener('click', () => {
     stopTimer();
     StopTimeLimit();
     mediaRecorder.stream.getTracks().forEach(track => track.stop());
+    countdownTimer.style.display = "none";
     status.style.color = "#e2cb45";
     dash.style.color = "#e2cb45";
     timer.style.color = "#e2cb45";
@@ -183,3 +184,4 @@ function downloadRecordedVideo(recordedBlob) {
   recorded = true;
   video.play();
 }
+
