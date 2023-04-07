@@ -1,4 +1,4 @@
-"use strict";
+//"use strict";
 
 const frameRate = document.querySelector('#frameRate');
 const resolution = document.querySelector('#resolution');
