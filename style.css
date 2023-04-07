@@ -159,7 +159,9 @@ button:hover {
 
 #resolution,
 #frameRate,
-#countdown {
+#countdown,
+#codec,
+#format {
   display: flex;
   flex-direction: column;
   padding: 0px 20px;
