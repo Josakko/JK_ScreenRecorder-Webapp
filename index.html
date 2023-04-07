@@ -50,10 +50,23 @@
             <option>360p</option>
           </select>
         </p>
-
-        <!--
         <p>
-          Countdown before recording (in seconds):
+          Video codec:
+          <select id="codec">
+            <option value="H264" selected>H.264</option>
+            <option value="vp9">VP9</option>
+            <option value="vp8">VP8</option>
+          </select>
+        </p>
+        <p>
+          Video format:
+          <select id="format">
+            <option value="mp4" selected>MP4</option>
+            <option value="webm">WebM</option>
+          </select>
+        </p>
+        <p>
+          Countdown before recording (in seconds): (this function is still WIP)
           <select id="countdown">
             <option value="disabled" selected>Disabled</option>
             <option>3</option>
@@ -61,8 +74,6 @@
             <option>10</option>
           </select>
 	      </p>
-        -->
-
         <p><input type="checkbox" id="mic" /> Record microphone audio (this function is still WIP)</p>
         <p><input type="checkbox" id="sys" checked /> Record system audio</p>
         <div class="limit-option">
