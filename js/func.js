@@ -2,6 +2,8 @@
 
 const frameRate = document.querySelector('#frameRate');
 const resolution = document.querySelector('#resolution');
+const codec = document.querySelector('#codec');
+const format = document.querySelector('#format');
 
 const sysCheckbox = document.getElementById('sys');
 let sys = true;
@@ -71,6 +73,12 @@ function MediaConstraints() {
 }
 
 let recorded = false;
+
+function videoConstraints() {
+    var Constraints = {};
+    Constraints.type = `video/${format.value}; codecs = ${codec.value}`;
+    return Constraints;
+}
 
 
 function StopTimeLimit() {
