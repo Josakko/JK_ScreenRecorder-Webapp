@@ -60,7 +60,7 @@ startButton.addEventListener('click', async () => {
   });
 
   mediaRecorder.addEventListener('stop', () => {
-    const recordedBlob = new Blob(recordedChunks, { type: 'video/mp4; codecs = H264' }); //type: 'video/mp4'
+    const recordedBlob = new Blob(recordedChunks, videoConstraints());  //const recordedBlob = new Blob(recordedChunks, { type: `video/mp4; codecs = H264` }); 
 
     videoPreview.style.display = 'none';
     //document.body.removeChild(videoPreview);
@@ -168,7 +168,7 @@ function downloadRecordedVideo(recordedBlob) {
   const seconds = now.getSeconds();
 
   const timestamp = `${hours}-${minutes}-${seconds}_${date}-${month}-${year}`;
-  const fileName = `recorded-video_${timestamp}.mp4`;
+  const fileName = `recorded-video_${timestamp}.${format.value}`;
 
   const url = URL.createObjectURL(recordedBlob);
   downloadLink.href = url;
