@@ -4,6 +4,7 @@ const frameRate = document.querySelector('#frameRate');
 const resolution = document.querySelector('#resolution');
 const codec = document.querySelector('#codec');
 const format = document.querySelector('#format');
+const countdownTimer = document.getElementById('countdownTimer');
 
 const sysCheckbox = document.getElementById('sys');
 let sys = true;
@@ -21,7 +22,7 @@ const timeLimitCheckbox = document.getElementById('timeLimit-enabled');
 const timeLimit = document.getElementById('timeLimit');
 const time_limit = document.getElementById('time-limit');
 let timeLimitEnabled = false;
-let timeLimitMins
+let timeLimitSec
 timeLimitCheckbox.addEventListener('click', () => {
   if (timeLimit.disabled == true) {
     timeLimit.disabled = false;
@@ -96,7 +97,7 @@ function TimeLimit() {
     seconds = seconds + 1
     //console.log(seconds);
 
-    if (seconds == timeLimitMins) {
+    if (seconds == timeLimitSec) {
       stopButton.click()
       return;
     }
