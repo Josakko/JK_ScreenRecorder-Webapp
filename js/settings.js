@@ -1,6 +1,6 @@
-var settings = document.getElementById("settings");
-var buttonSettings = document.getElementById("settingsButton");
-var spanSettings = document.getElementsByClassName("settings-close")[0];
+const settings = document.getElementById("settings");
+const buttonSettings = document.getElementById("settingsButton");
+const spanSettings = document.getElementsByClassName("settings-close")[0];
 
 buttonSettings.onclick = function() {
   settings.style.display = "block";
@@ -12,7 +12,8 @@ spanSettings.onclick = function() {
 }
 
 window.onclick = function(event) {
-  if (event.target == settings) {
+  if (event.target == settings || event.target == about) {
     settings.style.display = "none";
+    about.style.display = "none";
   }
 }
