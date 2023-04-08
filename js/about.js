@@ -1,18 +1,18 @@
-var modal = document.getElementById("aboutModal");
-var link = document.getElementById("aboutLink");
-var span = document.getElementsByClassName("close")[0];
+const about = document.getElementById("aboutModal");
+const link = document.getElementById("aboutLink");
+const span = document.getElementsByClassName("close")[0];
 
 link.onclick = function() {
-  modal.style.display = "block";
-  //modal.scrollIntoView({ behavior: "smooth", block: "center" });
+  about.style.display = "block";
+  //about.scrollIntoView({ behavior: "smooth", block: "center" });
 }
 
 span.onclick = function() {
-  modal.style.display = "none";
+  about.style.display = "none";
 }
 
 //window.onclick = function(event) {
-//  if (event.target == modal) {
-//    modal.style.display = "none";
+//  if (event.target == about) {
+//    about.style.display = "none";
 //  }
 //}
