@@ -29,7 +29,7 @@ startButton.addEventListener('click', async () => {
     return;
   }
   
-  timeLimitMins = timeLimit.value * 60;
+  timeLimitSec = timeLimit.value * 60;
   TimeLimit()
 
   //if (mic === true) {
@@ -184,4 +184,3 @@ function downloadRecordedVideo(recordedBlob) {
   recorded = true;
   video.play();
 }
-
