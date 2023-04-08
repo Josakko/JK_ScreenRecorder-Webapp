@@ -30,6 +30,7 @@ button {
   margin-right: 10px;
   margin-top: 20px;
   width: 250px;
+  transition: background-color 0.3s;
 }
 
 button:disabled {
@@ -94,7 +95,7 @@ h1 {
 }
 
 button:hover {
-    background-color: #409e3a;
+    background-color: #2c6c28;
 }
 
 .control {
@@ -207,14 +208,8 @@ button:hover {
 #downloadLink {
   display: flex;
   flex-direction: row;
-  align-items: center;
   justify-content: center;
   margin-top: 20px;
-}
-
-#downloadLink {
-  font-family: Arial;
-  font-size: 16px;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
@@ -225,26 +220,16 @@ button:hover {
   text-align: center;
   width: 210px;
   align-items: center;
+  transition: background-color 0.5s;
 }
 
 #downloadLink:hover {
-  background-color: #006F8B;
+  background-color: #0849c2; 
 }
 
 #refreshButton {
-  font-family: Arial;
-  font-size: 16px;
   padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  background-color: #4CAF50;
-  color: #fff;
-  cursor: pointer;
   margin-top: 20px;
-}
-
-#refreshButton:hover {
-    background-color: #409e3a;
 }
 
 #refreshButton:disabled {
