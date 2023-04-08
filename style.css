@@ -213,7 +213,7 @@ button:hover {
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
-  background-color: #008CBA;
+  background-color: #0849c2; /*background-color: #008CBA;*/
   color: #fff;
   text-decoration: none;
   margin-right: 10px;
@@ -224,7 +224,7 @@ button:hover {
 }
 
 #downloadLink:hover {
-  background-color: #0849c2; 
+  background-color: #002a77;   /*background-color: #0849c2; */
 }
 
 #refreshButton {
