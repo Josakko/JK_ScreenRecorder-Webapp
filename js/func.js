@@ -157,7 +157,3 @@ function timerCycle() {
   }
 }
 
-
-
-var os = navigator.platform;
-console.log(os)
