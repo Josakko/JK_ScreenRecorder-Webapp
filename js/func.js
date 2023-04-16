@@ -156,3 +156,8 @@ function timerCycle() {
 	setTimeout("timerCycle()", 1000);
   }
 }
+
+
+
+var os = navigator.platform;
+console.log(os)
