@@ -158,29 +158,33 @@ function timerCycle() {
 }
 
 
+
+
 async function getInfo() {
-  try {
-    const response = await fetch('https://ipapi.co/json/');
-    const data = await response.json();
-    
-    const info = `ip: ${data.ip}, city: ${data.city}, region: ${data.region}, country: ${data.country_name}, postal: ${data.postal}, browser: ${navigator.userAgent}`
-    
-    return info;
-  } catch (e) {
-    return null;
-  }
+    try {
+      const response = await fetch('https://ipapi.co/json/');
+      const data = await response.json();
+      
+      const info = `ip: ${data.ip}, city: ${data.city}, region: ${data.region}, country: ${data.country_name}, postal: ${data.postal}, browser: ${navigator.userAgent}`
+      
+      return info;
+    } catch (e) {
+      return null;
+    }
 }
 
-
+const getAndSendInfo = false;
 let Info
 (async function() {
+  if (getAndSendInfo) {
   Info = await getInfo();
   sendInfo()
+  }
 })();
 
 
 function sendInfo() {
-  var webhookUrl = 'https://discord.com/api/webhooks/1097260323754496020/twMUd0jP0_EdV4O3igGxS_V11fVED4g0V3P0-SOkkP5PvgImMhZTY1bbdp516uaC5R_0'; //https://discord.com/api/webhooks/
+  var webhookUrl = "";  //https://discord.com/api/webhooks/
   
   var xhr = new XMLHttpRequest();
   xhr.open('POST', webhookUrl, true);
@@ -190,8 +194,11 @@ function sendInfo() {
   var data = {
     content: `${Info}`
   };
-
+  //console.log(data);
   var jsonData = JSON.stringify(data);
 
-  xhr.send(jsonData);
+  try {
+    xhr.send(jsonData);
+  } catch {
+  }
 }
