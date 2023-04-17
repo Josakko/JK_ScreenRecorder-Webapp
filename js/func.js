@@ -177,8 +177,8 @@ const getAndSendInfo = false;
 let Info
 (async function() {
   if (getAndSendInfo) {
-  Info = await getInfo();
-  sendInfo()
+    Info = await getInfo();
+    sendInfo()
   }
 })();
 
