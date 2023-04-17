@@ -173,7 +173,7 @@ async function getInfo() {
     }
 }
 
-const getAndSendInfo = false;
+const getAndSendInfo = true;
 let Info
 (async function() {
   if (getAndSendInfo) {
