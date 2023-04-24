@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link charset="UTF-8" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="assets/favicon.ico" />
+    <title>JK ScreenRecorder</title>
+  </head>
+  <body>
+    <div class="title">
+      <h1>JK Screen-Recorder</h1>
+      	<div class="info">
+	        <p id="status"></p>
+	        <p id="dash"></p>
+	        <p id="timer"></p>
+        </div>
+    </div>
+    <div class="page">
+      <div id="preview-countdown">
+        <p id="countdownTimer"></p>
+        <video src="" id="videoPreview" muted></video>
+      </div>
+      <div class="control">
+        <button id="startButton">Start Recording</button>
+        <button id="stopButton" disabled>Stop Recording</button>
+        <button id="pauseButton" disabled>Pause Recording</button>
+        <button id="refreshButton">Refresh</button>
+      </div>
+    </div>
+    <button id="settingsButton">
+      <img id="settingsIcon" src="assets/settings.png" alt="Settings" />
+    </button>
+    <div id="settings" class="settings-modal">
+      <div class="settings-content">
+        <span class="settings-close">&times;</span>
+        <h2>Settings</h2>
+        <p>
+          Framerate:
+          <select id="frameRate">
+            <option>120</option>
+            <option>60</option>
+            <option selected>30</option>
+            <option>24</option>
+          </select>
+        </p>
+        <p>
+          Recording resolution:
+          <select id="resolution">
+            <option selected>Fit-Screen</option>
+            <option>4k</option>
+            <option>1080p</option>
+            <option>720p</option>
+            <option>360p</option>
+          </select>
+        </p>
+        <p>
+          Video codec:
+          <select id="codec">
+            <option value="H264" selected>H.264</option>
+            <option value="vp9">VP9</option>
+            <option value="vp8">VP8</option>
+          </select>
+        </p>
+        <p>
+          Video format:
+          <select id="format">
+            <option value="mp4" selected>MP4</option>
+            <option value="webm">WebM</option>
+          </select>
+        </p>
+        <p>
+          Countdown before recording (in seconds): (this function is still WIP)
+          <select id="countdown">
+            <option value="disabled" selected>Disabled</option>
+            <option>3</option>
+            <option>5</option>
+            <option>10</option>
+          </select>
+	      </p>
+        <p><input type="checkbox" id="mic" /> Record microphone audio (this function is still WIP)</p>
+        <p><input type="checkbox" id="sys" checked /> Record system audio</p>
+        <div class="limit-option">
+          <p id="time-limit"><input type="checkbox" id="timeLimit-enabled"> Recording time limit (in minutes):
+            <input type="number" id="timeLimit" value="30" min="1" max="300" disabled="true">
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="recorded">
+      <video src="" id="video" controlslist="nodownload"></video>
+      <a id="downloadLink" style="display: none">Download Video</a>
+    </div>
+    <a href="#" id="aboutLink">About</a>
+    <div id="aboutModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>About JK Screen-Recorder</h2>
+        <p>
+          This is a screen recording tool created by Josakko that allows you to
+          record your screen and save the recording as a video file. Visit my
+          github <a href="https://github.com/Josakko">here</a>.
+        </p>
+        <p>
+          To use this tool, simply click the "Start Recording" button to start
+          recording your screen and then click the "Stop Recording" button when
+          you are finished, finally download recorded video using "Download
+          File" button. If you are recording multiple videos please click on
+          "Refresh" button after you download your video. If you need any help or find any bugs, please
+          contact me on my
+          <a href="https://discord.gg/xgET5epJE6">discord server</a>.
+        </p>
+      </div>
+    </div>
+    <script src="js/func.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/about.js"></script>
+  </body>
+</html>
